@@ -1,0 +1,108 @@
+<svg width="100%" viewBox="0 0 680 620" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>Splunk SIEM Lab Architecture</title>
+  <desc>Data flow diagram showing Windows Server VM forwarding logs to Ubuntu Splunk VM over Azure VNet, with browser access to the Splunk web UI</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- Azure VNet outer container -->
+  <rect x="20" y="20" width="640" height="460" rx="18" fill="#E6F1FB" fill-opacity="0.4" stroke="#378ADD" stroke-width="1" stroke-dasharray="6 4"/>
+  <text x="50" y="46" font-family="sans-serif" font-size="12" fill="#185FA5" font-weight="500">Azure Virtual Network — 10.0.0.0/16</text>
+
+  <!-- WINDOWS SERVER VM -->
+  <rect x="44" y="65" width="258" height="390" rx="12" fill="#EEEDFE" fill-opacity="0.4" stroke="#7F77DD" stroke-width="0.5"/>
+
+  <!-- Monitor icon Windows -->
+  <rect x="118" y="82" width="112" height="78" rx="5" fill="#534AB7" fill-opacity="0.12" stroke="#7F77DD" stroke-width="0.5"/>
+  <rect x="126" y="89" width="96" height="56" rx="3" fill="#534AB7" fill-opacity="0.22"/>
+  <rect x="162" y="162" width="24" height="7" rx="2" fill="#534AB7" fill-opacity="0.4"/>
+  <rect x="147" y="169" width="54" height="4" rx="2" fill="#534AB7" fill-opacity="0.3"/>
+  <rect x="154" y="107" width="11" height="10" rx="1" fill="#7F77DD" fill-opacity="0.85"/>
+  <rect x="167" y="107" width="11" height="10" rx="1" fill="#7F77DD" fill-opacity="0.85"/>
+  <rect x="154" y="119" width="11" height="10" rx="1" fill="#7F77DD" fill-opacity="0.85"/>
+  <rect x="167" y="119" width="11" height="10" rx="1" fill="#7F77DD" fill-opacity="0.85"/>
+
+  <text x="173" y="196" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#3C3489">Windows Server VM</text>
+  <text x="173" y="212" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#534AB7">Lab 1 — AD Domain</text>
+
+  <!-- Event log box -->
+  <rect x="62" y="228" width="222" height="74" rx="8" fill="#F1EFE8" stroke="#888780" stroke-width="0.5"/>
+  <text x="173" y="250" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#2C2C2A">Windows Event Log</text>
+  <text x="173" y="267" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5F5E5A">Security · System · Application</text>
+  <text x="173" y="283" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5F5E5A">Event IDs: 4624 · 4625 · 4740</text>
+
+  <!-- Forwarder box -->
+  <rect x="62" y="318" width="222" height="62" rx="8" fill="#EEEDFE" stroke="#7F77DD" stroke-width="0.5"/>
+  <text x="173" y="343" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#3C3489">Universal Forwarder</text>
+  <text x="173" y="360" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#534AB7">inputs.conf · Port 9997</text>
+
+  <!-- NSG badge Windows -->
+  <rect x="62" y="398" width="222" height="44" rx="8" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/>
+  <text x="173" y="417" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#633806">NSG Rules</text>
+  <text x="173" y="433" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#854F0B">RDP :3389 → My IP only</text>
+
+  <!-- Arrow: Event log → Forwarder -->
+  <line x1="173" y1="302" x2="173" y2="316" stroke="#7F77DD" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- UBUNTU / SPLUNK VM -->
+  <rect x="378" y="65" width="258" height="390" rx="12" fill="#E1F5EE" fill-opacity="0.4" stroke="#1D9E75" stroke-width="0.5"/>
+
+  <!-- Monitor icon Ubuntu -->
+  <rect x="452" y="82" width="112" height="78" rx="5" fill="#1D9E75" fill-opacity="0.12" stroke="#1D9E75" stroke-width="0.5"/>
+  <rect x="460" y="89" width="96" height="56" rx="3" fill="#1D9E75" fill-opacity="0.22"/>
+  <rect x="496" y="162" width="24" height="7" rx="2" fill="#1D9E75" fill-opacity="0.4"/>
+  <rect x="481" y="169" width="54" height="4" rx="2" fill="#1D9E75" fill-opacity="0.3"/>
+  <circle cx="508" cy="117" r="16" fill="none" stroke="#1D9E75" stroke-width="2"/>
+  <circle cx="508" cy="117" r="9"  fill="#1D9E75" fill-opacity="0.5"/>
+  <circle cx="508" cy="105" r="4"  fill="#1D9E75" fill-opacity="0.7"/>
+  <circle cx="519" cy="124" r="4"  fill="#1D9E75" fill-opacity="0.7"/>
+  <circle cx="497" cy="124" r="4"  fill="#1D9E75" fill-opacity="0.7"/>
+
+  <text x="507" y="196" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#085041">Ubuntu 24.04 LTS VM</text>
+  <text x="507" y="212" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#0F6E56">Splunk Enterprise</text>
+
+  <!-- Indexer box -->
+  <rect x="396" y="228" width="222" height="52" rx="8" fill="#E1F5EE" stroke="#1D9E75" stroke-width="0.5"/>
+  <text x="507" y="250" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#085041">Splunk Indexer</text>
+  <text x="507" y="267" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#0F6E56">index=windows_logs</text>
+
+  <!-- SPL Engine box -->
+  <rect x="396" y="294" width="222" height="52" rx="8" fill="#E1F5EE" stroke="#1D9E75" stroke-width="0.5"/>
+  <text x="507" y="316" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#085041">SPL Detection Engine</text>
+  <text x="507" y="333" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#0F6E56">Searches · Dashboards · Alerts</text>
+
+  <!-- NSG badge Splunk -->
+  <rect x="396" y="360" width="222" height="82" rx="8" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+  <text x="507" y="381" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#173404">NSG Rules</text>
+  <text x="507" y="398" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#27500A">:8000 Web UI → My IP only</text>
+  <text x="507" y="415" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#27500A">:9997 Forwarder → VNet only</text>
+  <text x="507" y="432" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#27500A">:22 SSH → My IP only</text>
+
+  <!-- Arrow: Indexer → SPL -->
+  <line x1="507" y1="280" x2="507" y2="292" stroke="#1D9E75" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- FORWARDER → SPLUNK ARROW -->
+  <path d="M284 349 L378 349" fill="none" stroke="#FF6600" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="5 3"/>
+  <rect x="288" y="326" width="84" height="17" rx="4" fill="white" fill-opacity="0.9"/>
+  <text x="330" y="338" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#993C1D">TCP :9997 · TLS</text>
+
+  <!-- BROWSER -->
+  <rect x="200" y="510" width="280" height="78" rx="12" fill="#F1EFE8" stroke="#888780" stroke-width="0.5"/>
+  <circle cx="290" cy="549" r="22" fill="none" stroke="#888780" stroke-width="1"/>
+  <circle cx="290" cy="549" r="8"  fill="none" stroke="#888780" stroke-width="1"/>
+  <line x1="268" y1="549" x2="312" y2="549" stroke="#888780" stroke-width="0.8"/>
+  <line x1="290" y1="527" x2="290" y2="571" stroke="#888780" stroke-width="0.8"/>
+  <path d="M272 537 Q290 548 308 537" fill="none" stroke="#888780" stroke-width="0.7"/>
+  <path d="M272 561 Q290 550 308 561" fill="none" stroke="#888780" stroke-width="0.7"/>
+  <text x="390" y="542" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#2C2C2A">Browser</text>
+  <text x="390" y="558" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5F5E5A">Splunk Web UI</text>
+  <text x="390" y="573" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5F5E5A">Dashboards · Search · Alerts</text>
+
+  <!-- Arrow: Splunk VM → Browser -->
+  <path d="M507 455 L507 490 L340 490 L340 509" fill="none" stroke="#5F5E5A" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <rect x="358" y="478" width="82" height="17" rx="4" fill="white" fill-opacity="0.9"/>
+  <text x="399" y="490" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444441">HTTPS :8000</text>
+
+</svg>
