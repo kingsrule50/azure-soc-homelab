@@ -8,101 +8,113 @@
   </defs>
 
   <!-- Azure VNet outer container -->
-  <rect x="20" y="20" width="640" height="460" rx="18" fill="#E6F1FB" fill-opacity="0.4" stroke="#378ADD" stroke-width="1" stroke-dasharray="6 4"/>
-  <text x="50" y="46" font-family="sans-serif" font-size="12" fill="#185FA5" font-weight="500">Azure Virtual Network — 10.0.0.0/16</text>
+  <rect x="20" y="20" width="640" height="460" rx="18" fill="#D6E8F8" fill-opacity="0.55" stroke="#1565C0" stroke-width="1.8" stroke-dasharray="7 4"/>
+  <!-- VNet label pill background -->
+  <rect x="40" y="30" width="282" height="24" rx="6" fill="#1565C0" fill-opacity="0.15"/>
+  <text x="52" y="46" font-family="sans-serif" font-size="13" fill="#0D3C78" font-weight="700">Azure Virtual Network — 10.0.0.0/16</text>
 
-  <!-- WINDOWS SERVER VM -->
-  <rect x="44" y="65" width="258" height="390" rx="12" fill="#EEEDFE" fill-opacity="0.4" stroke="#7F77DD" stroke-width="0.5"/>
+  <!-- ══ WINDOWS SERVER VM ══════════════════════════════════════════════════ -->
+  <rect x="44" y="65" width="258" height="390" rx="12" fill="#EEEDFE" fill-opacity="0.55" stroke="#5E56CC" stroke-width="1.2"/>
 
-  <!-- Monitor icon Windows -->
-  <rect x="118" y="82" width="112" height="78" rx="5" fill="#534AB7" fill-opacity="0.12" stroke="#7F77DD" stroke-width="0.5"/>
-  <rect x="126" y="89" width="96" height="56" rx="3" fill="#534AB7" fill-opacity="0.22"/>
-  <rect x="162" y="162" width="24" height="7" rx="2" fill="#534AB7" fill-opacity="0.4"/>
-  <rect x="147" y="169" width="54" height="4" rx="2" fill="#534AB7" fill-opacity="0.3"/>
-  <rect x="154" y="107" width="11" height="10" rx="1" fill="#7F77DD" fill-opacity="0.85"/>
-  <rect x="167" y="107" width="11" height="10" rx="1" fill="#7F77DD" fill-opacity="0.85"/>
-  <rect x="154" y="119" width="11" height="10" rx="1" fill="#7F77DD" fill-opacity="0.85"/>
-  <rect x="167" y="119" width="11" height="10" rx="1" fill="#7F77DD" fill-opacity="0.85"/>
+  <!-- Monitor frame -->
+  <rect x="118" y="82" width="112" height="78" rx="6" fill="#6B63D4" fill-opacity="0.55" stroke="#5E56CC" stroke-width="1.5"/>
+  <!-- Screen -->
+  <rect x="127" y="90" width="94" height="54" rx="3" fill="#3D35A8" fill-opacity="0.75"/>
+  <!-- Stand neck -->
+  <rect x="163" y="161" width="22" height="8" rx="2" fill="#5E56CC" fill-opacity="0.9"/>
+  <!-- Stand base -->
+  <rect x="148" y="169" width="52" height="5" rx="2" fill="#5E56CC" fill-opacity="0.9"/>
+  <!-- Windows logo squares (white on dark screen) -->
+  <rect x="155" y="107" width="11" height="10" rx="1" fill="#FFFFFF" fill-opacity="0.95"/>
+  <rect x="168" y="107" width="11" height="10" rx="1" fill="#FFFFFF" fill-opacity="0.95"/>
+  <rect x="155" y="119" width="11" height="10" rx="1" fill="#FFFFFF" fill-opacity="0.95"/>
+  <rect x="168" y="119" width="11" height="10" rx="1" fill="#FFFFFF" fill-opacity="0.95"/>
 
-  <text x="173" y="196" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#3C3489">Windows Server VM</text>
-  <text x="173" y="212" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#534AB7">Lab 1 — AD Domain</text>
+  <text x="173" y="196" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#2A2480">Windows Server VM</text>
+  <text x="173" y="212" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4840A8">Lab 1 — AD Domain</text>
 
   <!-- Event log box -->
-  <rect x="62" y="228" width="222" height="74" rx="8" fill="#F1EFE8" stroke="#888780" stroke-width="0.5"/>
+  <rect x="62" y="228" width="222" height="74" rx="8" fill="#F1EFE8" stroke="#888780" stroke-width="0.8"/>
   <text x="173" y="250" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#2C2C2A">Windows Event Log</text>
   <text x="173" y="267" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5F5E5A">Security · System · Application</text>
   <text x="173" y="283" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5F5E5A">Event IDs: 4624 · 4625 · 4740</text>
 
   <!-- Forwarder box -->
-  <rect x="62" y="318" width="222" height="62" rx="8" fill="#EEEDFE" stroke="#7F77DD" stroke-width="0.5"/>
-  <text x="173" y="343" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#3C3489">Universal Forwarder</text>
-  <text x="173" y="360" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#534AB7">inputs.conf · Port 9997</text>
+  <rect x="62" y="318" width="222" height="62" rx="8" fill="#DDDCFC" stroke="#5E56CC" stroke-width="0.8"/>
+  <text x="173" y="343" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#2A2480">Universal Forwarder</text>
+  <text x="173" y="360" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4840A8">inputs.conf · Port 9997</text>
 
   <!-- NSG badge Windows -->
-  <rect x="62" y="398" width="222" height="44" rx="8" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/>
+  <rect x="62" y="398" width="222" height="44" rx="8" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.8"/>
   <text x="173" y="417" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#633806">NSG Rules</text>
   <text x="173" y="433" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#854F0B">RDP :3389 → My IP only</text>
 
   <!-- Arrow: Event log → Forwarder -->
-  <line x1="173" y1="302" x2="173" y2="316" stroke="#7F77DD" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="173" y1="302" x2="173" y2="316" stroke="#5E56CC" stroke-width="1.5" marker-end="url(#arrow)"/>
 
-  <!-- UBUNTU / SPLUNK VM -->
-  <rect x="378" y="65" width="258" height="390" rx="12" fill="#E1F5EE" fill-opacity="0.4" stroke="#1D9E75" stroke-width="0.5"/>
+  <!-- ══ UBUNTU / SPLUNK VM ═════════════════════════════════════════════════ -->
+  <rect x="378" y="65" width="258" height="390" rx="12" fill="#C8EFE0" fill-opacity="0.55" stroke="#0F8A5F" stroke-width="1.2"/>
 
-  <!-- Monitor icon Ubuntu -->
-  <rect x="452" y="82" width="112" height="78" rx="5" fill="#1D9E75" fill-opacity="0.12" stroke="#1D9E75" stroke-width="0.5"/>
-  <rect x="460" y="89" width="96" height="56" rx="3" fill="#1D9E75" fill-opacity="0.22"/>
-  <rect x="496" y="162" width="24" height="7" rx="2" fill="#1D9E75" fill-opacity="0.4"/>
-  <rect x="481" y="169" width="54" height="4" rx="2" fill="#1D9E75" fill-opacity="0.3"/>
-  <circle cx="508" cy="117" r="16" fill="none" stroke="#1D9E75" stroke-width="2"/>
-  <circle cx="508" cy="117" r="9"  fill="#1D9E75" fill-opacity="0.5"/>
-  <circle cx="508" cy="105" r="4"  fill="#1D9E75" fill-opacity="0.7"/>
-  <circle cx="519" cy="124" r="4"  fill="#1D9E75" fill-opacity="0.7"/>
-  <circle cx="497" cy="124" r="4"  fill="#1D9E75" fill-opacity="0.7"/>
+  <!-- Monitor frame -->
+  <rect x="452" y="82" width="112" height="78" rx="6" fill="#0F8A5F" fill-opacity="0.55" stroke="#0A6B49" stroke-width="1.5"/>
+  <!-- Screen -->
+  <rect x="461" y="90" width="94" height="54" rx="3" fill="#085041" fill-opacity="0.85"/>
+  <!-- Stand neck -->
+  <rect x="497" y="161" width="22" height="8" rx="2" fill="#0A6B49" fill-opacity="0.9"/>
+  <!-- Stand base -->
+  <rect x="482" y="169" width="52" height="5" rx="2" fill="#0A6B49" fill-opacity="0.9"/>
+  <!-- Ubuntu logo — bright white on dark screen -->
+  <circle cx="508" cy="117" r="16" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.9"/>
+  <circle cx="508" cy="117" r="7"  fill="#FFFFFF" fill-opacity="0.85"/>
+  <circle cx="508" cy="103" r="4"  fill="#FFFFFF" fill-opacity="0.95"/>
+  <circle cx="521" cy="125" r="4"  fill="#FFFFFF" fill-opacity="0.95"/>
+  <circle cx="495" cy="125" r="4"  fill="#FFFFFF" fill-opacity="0.95"/>
 
-  <text x="507" y="196" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#085041">Ubuntu 24.04 LTS VM</text>
-  <text x="507" y="212" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#0F6E56">Splunk Enterprise</text>
+  <text x="507" y="196" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#054030">Ubuntu 24.04 LTS VM</text>
+  <text x="507" y="212" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#0A6B49">Splunk Enterprise</text>
 
   <!-- Indexer box -->
-  <rect x="396" y="228" width="222" height="52" rx="8" fill="#E1F5EE" stroke="#1D9E75" stroke-width="0.5"/>
-  <text x="507" y="250" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#085041">Splunk Indexer</text>
-  <text x="507" y="267" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#0F6E56">index=windows_logs</text>
+  <rect x="396" y="228" width="222" height="52" rx="8" fill="#C8EFE0" stroke="#0F8A5F" stroke-width="0.8"/>
+  <text x="507" y="250" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#054030">Splunk Indexer</text>
+  <text x="507" y="267" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#0A6B49">index=windows_logs</text>
 
   <!-- SPL Engine box -->
-  <rect x="396" y="294" width="222" height="52" rx="8" fill="#E1F5EE" stroke="#1D9E75" stroke-width="0.5"/>
-  <text x="507" y="316" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#085041">SPL Detection Engine</text>
-  <text x="507" y="333" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#0F6E56">Searches · Dashboards · Alerts</text>
+  <rect x="396" y="294" width="222" height="52" rx="8" fill="#C8EFE0" stroke="#0F8A5F" stroke-width="0.8"/>
+  <text x="507" y="316" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#054030">SPL Detection Engine</text>
+  <text x="507" y="333" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#0A6B49">Searches · Dashboards · Alerts</text>
 
   <!-- NSG badge Splunk -->
-  <rect x="396" y="360" width="222" height="82" rx="8" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+  <rect x="396" y="360" width="222" height="82" rx="8" fill="#D6EDBE" stroke="#3B6D11" stroke-width="0.8"/>
   <text x="507" y="381" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#173404">NSG Rules</text>
   <text x="507" y="398" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#27500A">:8000 Web UI → My IP only</text>
   <text x="507" y="415" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#27500A">:9997 Forwarder → VNet only</text>
   <text x="507" y="432" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#27500A">:22 SSH → My IP only</text>
 
   <!-- Arrow: Indexer → SPL -->
-  <line x1="507" y1="280" x2="507" y2="292" stroke="#1D9E75" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="507" y1="280" x2="507" y2="292" stroke="#0F8A5F" stroke-width="1.5" marker-end="url(#arrow)"/>
 
   <!-- FORWARDER → SPLUNK ARROW -->
-  <path d="M284 349 L378 349" fill="none" stroke="#FF6600" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="5 3"/>
-  <rect x="288" y="326" width="84" height="17" rx="4" fill="white" fill-opacity="0.9"/>
-  <text x="330" y="338" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#993C1D">TCP :9997 · TLS</text>
+  <path d="M284 349 L378 349" fill="none" stroke="#E05A00" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="6 3"/>
+  <rect x="286" y="326" width="88" height="18" rx="5" fill="#FFF3E8" stroke="#E05A00" stroke-width="0.8"/>
+  <text x="330" y="339" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="600" fill="#A03800">TCP :9997 · TLS</text>
 
-  <!-- BROWSER -->
-  <rect x="200" y="510" width="280" height="78" rx="12" fill="#F1EFE8" stroke="#888780" stroke-width="0.5"/>
-  <circle cx="290" cy="549" r="22" fill="none" stroke="#888780" stroke-width="1"/>
-  <circle cx="290" cy="549" r="8"  fill="none" stroke="#888780" stroke-width="1"/>
-  <line x1="268" y1="549" x2="312" y2="549" stroke="#888780" stroke-width="0.8"/>
-  <line x1="290" y1="527" x2="290" y2="571" stroke="#888780" stroke-width="0.8"/>
-  <path d="M272 537 Q290 548 308 537" fill="none" stroke="#888780" stroke-width="0.7"/>
-  <path d="M272 561 Q290 550 308 561" fill="none" stroke="#888780" stroke-width="0.7"/>
+  <!-- ══ BROWSER ══════════════════════════════════════════════════════════ -->
+  <rect x="200" y="510" width="280" height="78" rx="12" fill="#EDEDEA" stroke="#6B6A65" stroke-width="1"/>
+  <!-- Globe icon -->
+  <circle cx="290" cy="549" r="22" fill="none" stroke="#5F5E5A" stroke-width="1.5"/>
+  <circle cx="290" cy="549" r="8"  fill="none" stroke="#5F5E5A" stroke-width="1.2"/>
+  <line x1="268" y1="549" x2="312" y2="549" stroke="#5F5E5A" stroke-width="1"/>
+  <line x1="290" y1="527" x2="290" y2="571" stroke="#5F5E5A" stroke-width="1"/>
+  <path d="M272 537 Q290 548 308 537" fill="none" stroke="#5F5E5A" stroke-width="0.9"/>
+  <path d="M272 561 Q290 550 308 561" fill="none" stroke="#5F5E5A" stroke-width="0.9"/>
+
   <text x="390" y="542" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#2C2C2A">Browser</text>
   <text x="390" y="558" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5F5E5A">Splunk Web UI</text>
   <text x="390" y="573" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5F5E5A">Dashboards · Search · Alerts</text>
 
   <!-- Arrow: Splunk VM → Browser -->
-  <path d="M507 455 L507 490 L340 490 L340 509" fill="none" stroke="#5F5E5A" stroke-width="1.2" marker-end="url(#arrow)"/>
-  <rect x="358" y="478" width="82" height="17" rx="4" fill="white" fill-opacity="0.9"/>
-  <text x="399" y="490" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444441">HTTPS :8000</text>
+  <path d="M507 455 L507 490 L340 490 L340 509" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="354" y="476" width="90" height="18" rx="5" fill="#FFF" fill-opacity="0.9" stroke="#6B6A65" stroke-width="0.5"/>
+  <text x="399" y="489" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="600" fill="#2C2C2A">HTTPS :8000</text>
 
 </svg>
