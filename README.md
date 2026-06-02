@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🔐 Lab 3 — Splunk SIEM & Log Analysis
+# 🔐 Lab 3 — Splunk Enterprise SIEM Deployment and Security Monitoring on Microsoft Azure
 
 ![Splunk](https://img.shields.io/badge/Splunk-Enterprise-FF6600?style=for-the-badge&logo=splunk&logoColor=white)
 ![Azure](https://img.shields.io/badge/Azure-VM-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)
