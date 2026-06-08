@@ -86,35 +86,11 @@ The VM was created in Azure under the `kingsvm_group` resource group. Windows Se
 
 ---
 
-**DC02 deployment in progress:**
-
-After clicking **Review + create** and then **Create**, Azure began provisioning the VM. The deployment screen confirms the network interface and public IP address resources are being created alongside the VM itself.
-
-![DC02 deployment in progress](screenshots/2026-05-16_16-26.png)
-
----
-
 **DC02 deployment complete:**
 
 The deployment completed successfully in under 2 minutes. The green **Deployment succeeded** notification confirms all resources — VM, NIC, and public IP — were provisioned without errors.
 
 ![DC02 deployment complete](screenshots/2026-05-16_16-27.png)
-
----
-
-**DC02 — Native RDP connection configured (Port 3389):**
-
-From the DC02 VM blade, navigated to **Connect > Native RDP**. The public IP (20.120.38.222) and port 3389 were confirmed. The source IP restriction for RDP was set to my IP only in the NSG before connecting, following least-privilege access principles.
-
-![DC02 RDP connect page](screenshots/2026-05-16_16-29.png)
-
----
-
-**RDP session establishing into DC02:**
-
-After downloading and opening the RDP file, the session connected as `Admin01`. The "Please wait for the User" screen confirms the session handshake completed and the Windows desktop is loading — the VM is responsive and accessible.
-
-![DC02 RDP session loading](screenshots/2026-05-16_16-36.png)
 
 ---
 
@@ -143,30 +119,6 @@ In the Azure portal, navigated to **Virtual Machines > Create**. Ubuntu Server 2
 
 ---
 
-**VM configuration — subscription and resource group:**
-
-The VM was added to the existing `kingsvm_group` resource group so all lab resources are managed together and can be deleted as a single unit at the end of the lab. The region was set to East US to match DC02, keeping both VMs in the same Azure VNet for low-latency internal communication.
-
-![Splunk VM subscription and resource group](screenshots/2026-05-16_15-28.png)
-
----
-
-**Ubuntu 24.04 LTS VM deployment in progress:**
-
-After validation passed, the deployment was confirmed. The network interface (`splunk-server31`) and public IP (`splunk-server-ip`) resources are being provisioned first, followed by the VM itself.
-
-![Splunk VM deployment in progress](screenshots/2026-05-16_16-03.png)
-
----
-
-**Deployment complete — splunk-server live:**
-
-The **Deployment succeeded** notification confirms all resources were created without errors. Clicked **Go to resource** to open the VM blade and confirm the public IP address before proceeding with SSH.
-
-![Splunk VM deployment complete](screenshots/2026-05-16_16-04.png)
-
----
-
 **splunk-server VM properties — OS, size, and network confirmed:**
 
 From the VM **Properties** tab, confirmed: OS is Linux (Ubuntu 24.04), size is Standard D2s v3 (2 vCPUs, 8 GiB RAM), private IP is 10.0.0.4, and the VM is connected to the `kingsvm-vnet/default` subnet — the same VNet as DC02. This confirms both VMs share an internal network and can communicate without traversing the public internet.
@@ -178,22 +130,6 @@ From the VM **Properties** tab, confirmed: OS is Linux (Ubuntu 24.04), size is S
 #### NSG Rules Configured
 
 After deployment, three inbound rules were added to the `kingsvm-nsg` Network Security Group to control access to the Splunk VM.
-
----
-
-**Adding inbound rule — Port 8000 (Splunk Web UI):**
-
-Navigated to the Splunk VM > **Networking > Network settings > Create port rule > Inbound port rule**. Set destination port to `8000`, protocol to TCP, action to Allow, and named the rule `allow-splunk-web`. The source was restricted to my IP address only — port 8000 must never be open to the public internet as it provides direct access to the Splunk admin interface.
-
-![NSG rule port 8000](screenshots/2026-05-16_17-48.png)
-
----
-
-**Adding inbound rule — Port 9997 (Forwarder input):**
-
-A second rule was created for port `9997` — the port Splunk uses to receive logs from the Universal Forwarder. Named `allow-splunk-forwarder`. The source was set to the VNet address range (10.0.0.0/16) rather than my IP, because DC02 (not my local machine) is the one sending logs to Splunk. Restricting to the VNet ensures this port is only reachable from other Azure VMs in the same network.
-
-![NSG rule port 9997](screenshots/2026-05-16_17-49.png)
 
 ---
 
@@ -219,14 +155,6 @@ From an Administrator PowerShell session on DC02, ran `ping 10.0.0.4` — the pr
 
 ---
 
-**OpenSSH confirmed installed on Windows Server — SSH client ready:**
-
-Ran `Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH.Client*'` in PowerShell to confirm OpenSSH was available on DC02. The result showed `State: Installed`, meaning SSH commands could be run directly from the Windows Server terminal — no additional tools needed to connect to the Ubuntu Splunk VM.
-
-![OpenSSH installed](screenshots/2026-05-16_16-45.png)
-
----
-
 #### Splunk Enterprise Installed via SSH
 
 SSH was established from DC02 into the Ubuntu Splunk VM using the private IP (10.0.0.4) over the VNet — keeping all traffic internal to Azure.
@@ -241,31 +169,6 @@ From the DC02 PowerShell terminal, ran `ssh azureuser@10.0.0.4`. After accepting
 
 ---
 
-**System packages updated before Splunk installation:**
-
-Before installing any software, ran `sudo apt update && sudo apt upgrade -y` to ensure all system packages were current. This is standard practice before installing a server application — outdated packages can cause dependency conflicts or leave known vulnerabilities in place. The output shows 24+ package repositories being updated from Azure's Ubuntu mirror.
-
-![apt update running](screenshots/2026-05-16_16-48.png)
-
-```bash
-# Connected to the Ubuntu 24.04 LTS VM over SSH, then ran the following:
-
-# Download Splunk Enterprise — Linux .deb package
-wget -O splunk-10.2.2-linux-amd64.deb \
-  "https://download.splunk.com/products/splunk/releases/10.2.2/linux/splunk-10.2.2-80b90d638de6-linux-amd64.deb"
-
-# Install the package
-sudo dpkg -i splunk-10.2.2-linux-amd64.deb
-
-# Start Splunk and accept the licence
-sudo /opt/splunk/bin/splunk start --accept-license
-
-# Enable Splunk to auto-start on VM reboot
-sudo /opt/splunk/bin/splunk enable boot-start
-```
-
----
-
 **Splunk installation complete — web server at :8000 confirmed running:**
 
 The installation output shows all preliminary checks passing, the RSA private key being generated for TLS, and the final line confirming the Splunk web server is available at `http://splunk-server:8000`. The `Done` status on the "Waiting for web server" line confirms Splunk started successfully and is listening for connections.
@@ -277,14 +180,6 @@ The installation output shows all preliminary checks passing, the RSA private ke
 #### Splunk Web UI Accessed
 
 With Splunk running, the web interface was accessed from the DC02 browser using the Splunk VM's private IP on port 8000.
-
----
-
-**Splunk Enterprise login page — accessed via browser at 10.0.0.4:8000:**
-
-Opened a browser on DC02 and navigated to `http://10.0.0.4:8000`. The Splunk Enterprise login page loaded successfully, confirming port 8000 is reachable from within the VNet and Splunk's web server process is running. Logged in with the admin credentials set during installation.
-
-![Splunk login page](screenshots/2026-05-16_17-53.png)
 
 ---
 
@@ -304,30 +199,6 @@ Sysmon (System Monitor) was deployed on DC02 to enrich Windows Event Logs with p
 
 ---
 
-**Sysmon v15.2 downloaded from Microsoft Sysinternals:**
-
-On DC02, opened a browser and navigated to `learn.microsoft.com/en-us/sysinternals/downloads/sysmon`. Sysmon v15.2 (4.6 MB) was downloaded. Sysmon was chosen because it generates high-fidelity telemetry that standard Windows Event Logs do not capture — particularly process creation chains and network connections initiated by specific processes.
-
-![Sysmon download page](screenshots/2026-05-16_17-55.png)
-
----
-
-**Sysmon files extracted to C:\Tools\Sysmon:**
-
-The downloaded Sysmon.zip was extracted to a dedicated folder at `C:\Tools\Sysmon`. The folder contains four files: Eula.txt, Sysmon.exe (32-bit), Sysmon64.exe (64-bit), and Sysmon64a.exe (ARM). Sysmon64.exe was used for this installation since DC02 runs a 64-bit Windows Server environment.
-
-![Sysmon files extracted](screenshots/2026-05-16_18-02.png)
-
----
-
-**Sysmon configuration file (sysmonconfig-export.xml) saved:**
-
-A Sysmon configuration file was downloaded from a community-maintained repository (SwiftOnSecurity's sysmonconfig) and saved as `sysmonconfig-export.xml` inside `C:\Tools\Sysmon`. The configuration file controls which events Sysmon captures and which it ignores — using a well-maintained community config prevents excessive noise while ensuring critical events are logged.
-
-![Sysmon config saved](screenshots/2026-05-16_18-06.png)
-
----
-
 **Sysmon64 installed and started — SplunkForwarder service confirmed Running:**
 
 From an Administrator PowerShell session, navigated to `C:\Tools\Sysmon` and ran `.\Sysmon64.exe -accepteula -i sysmonconfig-export.xml`. The output confirms: configuration validated, Sysmon64 installed, SysmonDrv driver installed and started. Running `Get-Service *splunk*` afterwards confirmed the SplunkForwarder service is already running — both the telemetry collector and the log shipper are active simultaneously.
@@ -342,22 +213,6 @@ The Splunk Universal Forwarder was installed on DC02 to automatically ship Windo
 
 - **Deployment Server:** `10.0.0.4:8089`
 - **Receiving Indexer:** `10.0.0.4:9997`
-
----
-
-**Universal Forwarder setup wizard — on-premises Splunk Enterprise instance selected:**
-
-On DC02, downloaded the Splunk Universal Forwarder Windows 64-bit installer from `splunk.com/en_us/download/universal-forwarder.html`. During installation, accepted the licence agreement and selected **An on-premises Splunk Enterprise instance** (not Splunk Cloud). The receiving indexer was set to `10.0.0.4:9997` — the private IP of the Splunk VM and the port configured to receive forwarder data.
-
-![Universal Forwarder setup wizard](screenshots/2026-05-16_18-37.png)
-
----
-
-**Universal Forwarder installation in progress:**
-
-The installer is copying files to `C:\Program Files\SplunkUniversalForwarder`. The progress bar confirms the installation is proceeding. Once complete, the forwarder registers itself as a Windows service and starts automatically — no manual start required after the wizard finishes.
-
-![Universal Forwarder installing](screenshots/2026-05-16_20-09.png)
 
 ---
 
@@ -388,14 +243,6 @@ After saving the file, the forwarder service was restarted with `Restart-Service
 All searches were run inside **Search & Reporting** in the Splunk web UI. The search bar accepts SPL (Splunk Processing Language) queries and returns results from the indexed log data.
 
 ### Data Flow Confirmed
-
----
-
-**Initial search — first events arriving from DC02 (WinEventLog:System):**
-
-To verify logs were flowing, ran `index=* EventCode=1` in the Splunk search bar with the time range set to **Last 24 hours**. The search returned 9 events, all sourced from `DC02` with `sourcetype=WinEventLog:System`. This confirmed the Universal Forwarder on DC02 was successfully shipping logs to Splunk and they were being indexed correctly.
-
-![Initial data flowing](screenshots/2026-05-16_20-25.png)
 
 ---
 
@@ -487,30 +334,6 @@ A **Windows Security Monitoring Dashboard** was built in Splunk to provide a per
 
 ---
 
-**Create New Dashboard dialog — Classic dashboard selected:**
-
-Navigated to **Dashboards** in the top Splunk navigation bar, then clicked **Create New Dashboard**. The dashboard was named `Windows Security Monitoring Dashboard` with the description "Security Event monitoring, login tracking, and process activity analysis". **Classic Dashboards** was selected over Dashboard Studio because it uses the simpler XML-based panel editor — better suited for a lab environment where speed of setup matters over visual customisation.
-
-![Create new dashboard](screenshots/2026-05-16_20-33.png)
-
----
-
-**Adding Login Activity Over Time panel (Line Chart — EventCode=4624 timechart):**
-
-Inside the dashboard editor, clicked **+ Add Panel > New > Line Chart**. The panel was titled "Login Activity Over Time" and the SPL search `index=* sourcetype=WinEventLog:Security EventCode=4624 | timechart count` was entered. A Line Chart was chosen because timechart output is a time-series — the line format makes login volume trends and anomalous spikes immediately visible at a glance.
-
-![Adding line chart panel](screenshots/2026-05-16_20-40.png)
-
----
-
-**Adding After-Hours Logins panel (Events list — after-hours detection query):**
-
-A second panel was added using **New > Events**. Titled "After-Hours Logins", it uses the after-hours detection SPL with `eval hour` and `where hour < 7 OR hour > 19` to filter logins outside business hours. An Events list was chosen rather than a chart because the exact account name, timestamp, and workstation are the critical details — a chart would aggregate and hide that granularity.
-
-![Adding after-hours panel](screenshots/2026-05-16_20-41.png)
-
----
-
 **Dashboard — Account Activity Last 24h and Top Processes panels:**
 
 The completed dashboard shows the first two panels populated with live data from DC02. The **Account Activity** bar chart shows DC02$, SYSTEM, and SplunkForwarder as the top authentication sources — all expected service accounts. The **Top Processes** events list shows recent Security events from DC02 with EventCode=4688 (process creation), driven by the Sysmon telemetry configured in Step 2.
@@ -548,20 +371,6 @@ After running and validating the EventCode=4672 detection query in the search ba
 
 ---
 
-**Detection query results — privileged logons by account and computer:**
-
-Before saving the alert, the underlying SPL query was validated in the search bar. The query returned 22 events showing two accounts — SYSTEM (21 events) and SplunkForwarder (1 event) — both on DC02. These are expected high-privilege service accounts. In a real environment, any unexpected account name appearing in this result would indicate a potential privilege escalation and would require immediate investigation.
-
-![Alert SPL query results](screenshots/2026-05-16_20-50.png)
-
-```spl
-index=* sourcetype=WinEventLog:Security EventCode=4672
-| stats count as privilege_logons by Account_Name, ComputerName
-| where privilege_logons > 0
-```
-
----
-
 **Alert confirmed active — "High Privileged Logon Count" status: Enabled ✅:**
 
 Navigated to **Settings > Searches, Reports, and Alerts** to verify the alert was saved and active. The alert appears in the list as type **Alert**, with next scheduled time of `2026-05-17 01:00:00 UTC` and status **Enabled**. This confirms Splunk will run the detection query every 15 minutes automatically without any manual intervention.
@@ -580,22 +389,6 @@ Navigated to **Settings > Searches, Reports, and Alerts** to verify the alert wa
 ---
 
 ## ✔️ Verification
-
----
-
-**splunk-server VM — Status: Running, Standard D2s v3, Ubuntu 24.04:**
-
-Navigated to the `splunk-server` VM overview in the Azure portal to confirm the VM was in a Running state. The essentials panel confirms: OS is Linux (Ubuntu 24.04), size is Standard D2s v3, public IP is 20.102.65.90, private IP is 10.0.0.4, and the VM is connected to the `kingsvm-vnet/default` subnet. All values match the configuration applied during deployment.
-
-![Splunk server VM running](screenshots/2026-05-16_20-53.png)
-
----
-
-**Network settings — all NSG rules confirmed (final state):**
-
-Navigated to `splunk-server > Networking > Network settings` to confirm the final NSG rule state. Six inbound rules are visible: RDP (3389), allow-splunk-web (8000), and allow-splunk-forwarder (9997) are the three custom rules, all showing **Allow**. The source for all three is correctly set — confirming no ports are accidentally open to the public internet beyond what was intended.
-
-![NSG rules final state](screenshots/2026-05-16_20-53_1.png)
 
 ---
 
